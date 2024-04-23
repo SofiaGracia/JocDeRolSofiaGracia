@@ -1,7 +1,9 @@
 
 package personatges;
 
+import altres.Equip;
 import excepcions.AtacAMortException;
+import java.util.Objects;
 
 /**
  *
@@ -13,6 +15,7 @@ public class Jugador {
     private int puntsAtac;
     private int puntsDefensa;
     private int vides;
+    private Equip equip;
     
     //Constructor
     public Jugador(String nom, int pA, int pD, int pV) {
@@ -56,7 +59,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return this.nom+" ( "+this.getClass().getSimpleName().toUpperCase()+", PA:"+
+        return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+this.getClass().getSimpleName().toUpperCase()+", PA:"+
                 this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+
                 " / PV:"+this.getVides()+" )";
     }
@@ -74,12 +77,13 @@ public class Jugador {
     public void ataca(Jugador atacat) throws AtacAMortException{
         //ABANS DE L'ATAC:
         mostrarConfrontacio(this, atacat);
-        if(atacat.vides == 0){
+        
+        if(atacat.getVides() == 0){
             throw new AtacAMortException();
-        }else{
-            atacat.esColpejatAmb(this.getPuntsAtac());
-            this.esColpejatAmb(atacat.getPuntsAtac());
         }
+        atacat.esColpejatAmb(this.getPuntsAtac());
+        this.esColpejatAmb(atacat.getPuntsAtac());
+        
         System.out.println("");
         //DESPRÉS DE L'ATAC:
         mostrarConfrontacio(this, atacat);
@@ -90,4 +94,32 @@ public class Jugador {
         System.out.println("Atacant: "+atacant.toString());
         System.out.println("Atacat: "+atacat.toString());
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        final Jugador jug = (Jugador)obj;
+        return this.nom.equals(jug.nom);
+    }
+
+//    public boolean equals(Jugador jug) {
+//        return this.nom.equals(jug.nom);
+//    }
+
+    public Equip getEquip() {
+        return equip;
+    }
+
+    public void setEquip(Equip equip) {
+        
+        if(equip != null && this.equip == null){
+            //posar
+            this.equip = equip;
+            equip.posa(this);
+        }else if(equip == null && this.equip != null){
+            //llevar
+            this.equip.lleva(this.nom);
+            this.equip = null;
+        }
+    }
+    
 }

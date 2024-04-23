@@ -10,12 +10,12 @@ package excepcions;
  */
 public class AtacAMortException extends Exception{
 
-//    // Constructor passant-li el text de l’error
-//    public AtacAMortException(String msg) {
-//        super(msg);
-//    }
+    // Constructor passant-li el text de l’error
+    public AtacAMortException(String msg) {
+        super(msg);
+    }
     
-    // Constructor sense passar-li el text de l’error
+//     Constructor sense passar-li el text de l’error
     public AtacAMortException(){
         super("No es pot atacar a un mort");
     }
