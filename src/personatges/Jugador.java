@@ -64,20 +64,18 @@ public class Jugador {
     public String toString() {
         
         String poders = "";
-        if(this.poders.size() > 0){
+        if(!this.poders.isEmpty()){
             for (Poder poder : this.poders) {
-                poders += "\t- "+poder.toString()+"\n";
+                poders += "\n"+poder.toString();
             }
         }
-        
-        return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+this.getClass().getSimpleName().toUpperCase()+", PA:"+
-                this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+
-                " / PV:"+this.getVides()+" )"+
-                (this.poders.size() > 0? poders: "");
+        return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+
+                this.getClass().getSimpleName().toUpperCase()+
+                ", PA:"+this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+" / PV:"+this.getVides()+" )"+
+                (!this.poders.isEmpty()? poders: "");
     }
 
     protected void esColpejatAmb(int qpA) {
-        
         System.out.println("");
         System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
         int ferida = (this.puntsDefensa+this.sumaB("D")) - qpA;
@@ -89,41 +87,34 @@ public class Jugador {
     public void ataca(Jugador atacat) throws AtacAMortException{
         //ABANS DE L'ATAC:
         mostrarConfrontacio(this, atacat);
-        
         if(atacat.getVides() == 0){
             throw new AtacAMortException();
         }
         atacat.esColpejatAmb(this.getPuntsAtac()+this.sumaB("A"));
         this.esColpejatAmb(atacat.getPuntsAtac()+atacat.sumaB("A"));
-        
         System.out.println("");
         //DESPRÉS DE L'ATAC:
-        
         mostrarConfrontacio(this, atacat);
     }
-    //Funció per a no repetir codi
     public void mostrarConfrontacio(Jugador atacant, Jugador atacat){
         System.out.println("");
         System.out.println("Atacant: "+atacant.toString());
         System.out.println("Atacat: "+atacat.toString());
     }
-    public int sumaB(String tipusBonus){
-        int BA = 0, BD = 0;
-        for (Poder poder : this.poders) {
-            BA += poder.getBonusAtac();
-            BD += poder.getBonusDefensa();
-        }
-        int Bonus = 0;
-        if(this.poders.size() > 0){
-            switch(tipusBonus){
-                case "A": Bonus = BA; break;
-                case "D": Bonus = BD; break;
-                default: Bonus = 0;
+    public int sumaB(String tipusBonus){//No fem ningún control, però tampoc arrepleguem res de teclat
+        int Bonus = 0,BA = 0, BD = 0;
+        if(!this.poders.isEmpty()){
+            for (Poder poder : this.poders) {
+                BA += poder.getBonusAtac();
+                BD += poder.getBonusDefensa();
             }
         }
+        switch(tipusBonus){
+                case "A": Bonus = BA; break;
+                case "D": Bonus = BD; break;
+            }
         return Bonus;
     }
-    
     @Override
     public boolean equals(Object obj) {
         final Jugador jug = (Jugador)obj;
@@ -132,9 +123,7 @@ public class Jugador {
     public Equip getEquip() {
         return equip;
     }
-
     public void setEquip(Equip equip) {
-        
         if(equip != null && this.equip == null){
             //posar
             this.equip = equip;

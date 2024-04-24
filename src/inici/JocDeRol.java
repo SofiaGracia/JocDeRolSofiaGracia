@@ -28,6 +28,7 @@ public class JocDeRol {
             System.out.println(ex.getMessage());
         }
         provaFase4();
+        provaFase5();
     }
     static void provaFase1(){
 //        System.out.println("Vaig a crear un Humà");
@@ -88,7 +89,7 @@ public class JocDeRol {
         Jugador g2 = new Guerrer("GuerrerRoser", 10, 1, 11);
         Equip e1 = new Equip("SofiaUnited");Equip e2 = new Equip("RoserUnited");
         e1.posa(h1);e1.posa(a1);e1.posa(g1);
-        e1.posa(h2);e1.posa(a2);e1.posa(g2);
+        e2.posa(h2);e2.posa(a2);e2.posa(g2);
         
         Poder aire = new Poder("Aire",10,1);
         Poder terra = new Poder("Terra",5,11);
@@ -97,5 +98,10 @@ public class JocDeRol {
         
         h2.posaPoder(aire);
         h2.posaPoder(terra);
+        try{
+            h1.ataca(h2);
+        }catch(AtacAMortException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

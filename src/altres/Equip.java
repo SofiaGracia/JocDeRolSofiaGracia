@@ -40,7 +40,7 @@ public class Equip {
     }
     
     public void lleva(String nomJ){
-        //Anem a crear un jugador amb eixe nom
+        //Anem a crear un jugador amb el mateix nom
         Jugador borrJug = new Jugador(nomJ,0,0,0);
         
         if(this.jugadors.contains(borrJug)){
