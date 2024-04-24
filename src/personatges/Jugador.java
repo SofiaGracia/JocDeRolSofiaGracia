@@ -89,8 +89,7 @@ public class Jugador {
         }
         System.out.println("");
     }
-    public int sumaB(String tipusBonus){
-        
+    public int sumaB(String tipusBonus){//Esta solució no és vàlida si canvie el format del toString
         int Bonus = 0;
         if(this.poders.size() > 0){
             String [] paraules = this.toString().split(" ");
