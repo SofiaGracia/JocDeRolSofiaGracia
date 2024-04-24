@@ -82,7 +82,7 @@ public class Jugador {
 
     protected void esColpejatAmb(int qpA) {
         System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
-        int ferida = this.puntsDefensa - qpA;
+        int ferida = (this.puntsDefensa+this.sumaB("D")) - qpA;
         if(ferida < 0){
             this.vides = (this.vides + ferida) < 0 ? 0 : (this.vides + ferida);
             System.out.print("-"+(ferida < 0 ? -ferida : ferida)+" = "+this.vides);
