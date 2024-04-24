@@ -2,7 +2,9 @@
 package personatges;
 
 import altres.Equip;
+import altres.Poder;
 import excepcions.AtacAMortException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -16,6 +18,7 @@ public class Jugador {
     private int puntsDefensa;
     private int vides;
     private Equip equip;
+    private ArrayList<Poder> poders = new ArrayList();
     
     //Constructor
     public Jugador(String nom, int pA, int pD, int pV) {
@@ -59,9 +62,18 @@ public class Jugador {
 
     @Override
     public String toString() {
+        
+        String poders = "";
+        if(this.poders.size() > 0){
+            for (Poder poder : this.poders) {
+                poders += "\t- "+poder.toString()+"\n";
+            }
+        }
+        
         return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+this.getClass().getSimpleName().toUpperCase()+", PA:"+
                 this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+
-                " / PV:"+this.getVides()+" )";
+                " / PV:"+this.getVides()+" )"+
+                (this.poders.size() > 0? poders: "");
     }
 
     protected void esColpejatAmb(int qpA) {
@@ -86,6 +98,7 @@ public class Jugador {
         
         System.out.println("");
         //DESPRÉS DE L'ATAC:
+        
         mostrarConfrontacio(this, atacat);
     }
     //Funció per a no repetir codi
@@ -121,5 +134,19 @@ public class Jugador {
             this.equip = null;
         }
     }
-    
+    //Métodes poder
+    public void posaPoder(Poder pod){
+        if(this.poders.indexOf(pod) == -1){
+            this.poders.add(pod);
+        }else{
+            System.out.println(this.nom+" ja té el poder "+pod);
+        }
+    }
+    public void llevaPoder(Poder pod){
+        if(this.poders.indexOf(pod) == -1){
+            System.out.println(this.nom+" no té el poder "+pod);
+        }else{
+            this.poders.remove(pod);
+        }
+    }
 }
