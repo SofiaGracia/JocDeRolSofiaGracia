@@ -6,7 +6,7 @@ public class Poder {
 
     @Override
     public String toString() {
-        return "\t- "+this.nom+" (BA:"+this.bonusAtac+", "+"BD:"+this.bonusDefensa+")";
+        return this.nom+" (BA:"+this.bonusAtac+", "+"BD:"+this.bonusDefensa+")";
     }
     private int bonusAtac;
     private int bonusDefensa;

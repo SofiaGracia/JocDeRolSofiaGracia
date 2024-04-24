@@ -5,6 +5,7 @@ import altres.Equip;
 import altres.Poder;
 import excepcions.AtacAMortException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -64,27 +65,42 @@ public class Jugador {
     public String toString() {
         
         String poders = "";
+        int conBA = 0, conBD = 0;
         if(this.poders.size() > 0){
             for (Poder poder : this.poders) {
-                poders += "\t- "+poder.toString()+"\n";
+                poders += "\t\n- "+poder.toString();
+                conBA += poder.getBonusAtac();
+                conBD += poder.getBonusDefensa();
             }
         }
         
         return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+this.getClass().getSimpleName().toUpperCase()+", PA:"+
                 this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+
                 " / PV:"+this.getVides()+" )"+
-                (this.poders.size() > 0? poders: "");
+                (this.poders.size() > 0? poders+"\n>Total BA i BD: "+conBA+" / "+conBD: "");
     }
 
     protected void esColpejatAmb(int qpA) {
-        
-        System.out.println("");
-        System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+this.puntsDefensa+". Vides: "+this.vides);
+        System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
         int ferida = this.puntsDefensa - qpA;
         if(ferida < 0){
             this.vides = (this.vides + ferida) < 0 ? 0 : (this.vides + ferida);
             System.out.print("-"+(ferida < 0 ? -ferida : ferida)+" = "+this.vides);
         }
+        System.out.println("");
+    }
+    public int sumaB(String tipusBonus){
+        
+        int Bonus = 0;
+        if(this.poders.size() > 0){
+            String [] paraules = this.toString().split(" ");
+            switch(tipusBonus){
+                case "A": Bonus = Integer.parseInt(paraules[paraules.length-3]); break;
+                case "D": Bonus = Integer.parseInt(paraules[paraules.length-1]); break;
+                default: Bonus = 0;
+            }
+        }
+        return Bonus;
     }
     public void ataca(Jugador atacat) throws AtacAMortException{
         //ABANS DE L'ATAC:
@@ -93,8 +109,8 @@ public class Jugador {
         if(atacat.getVides() == 0){
             throw new AtacAMortException();
         }
-        atacat.esColpejatAmb(this.getPuntsAtac());
-        this.esColpejatAmb(atacat.getPuntsAtac());
+        atacat.esColpejatAmb(this.getPuntsAtac()+this.sumaB("A"));
+        this.esColpejatAmb(atacat.getPuntsAtac()+this.sumaB("A"));
         
         System.out.println("");
         //DESPRÉS DE L'ATAC:
