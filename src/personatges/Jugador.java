@@ -113,11 +113,6 @@ public class Jugador {
         final Jugador jug = (Jugador)obj;
         return this.nom.equals(jug.nom);
     }
-
-//    public boolean equals(Jugador jug) {
-//        return this.nom.equals(jug.nom);
-//    }
-
     public Equip getEquip() {
         return equip;
     }

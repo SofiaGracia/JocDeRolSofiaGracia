@@ -5,6 +5,7 @@
 package inici;
 
 import altres.Equip;
+import altres.Poder;
 import excepcions.AtacAMortException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,30 +65,37 @@ public class JocDeRol {
 //        System.out.println(a1.toString());
     }
     static void provaFase4(){
-        Jugador h1 = new Huma("Pep_Garcia", 13, 8, 105);
-        Jugador a1 = new Alien("E.T.", 4, 20, 33);
-        Jugador g1 = new Guerrer("Sofia", 0, 1, 0);
+//        Jugador h1 = new Huma("Pep_Garcia", 13, 8, 105);
+//        Jugador a1 = new Alien("E.T.", 4, 20, 33);
+//        Jugador g1 = new Guerrer("Sofia", 0, 1, 0);
+//        
+//        Equip e1 = new Equip("SuecaUnited");
+//        
+//        //Provem a posar a h1
+//        e1.posa(h1);
+//        
+//        e1.posa(g1);
+//        e1.posa(a1);
+//        e1.posa(h1);
+    }
+    static void provaFase5(){
+        Jugador h1 = new Huma("HumaSofia", 13, 8, 105);
+        Jugador a1 = new Alien("AlienSofia", 4, 20, 33);
+        Jugador g1 = new Guerrer("GuerrerSofia", 10, 1, 11);
         
-        Equip e1 = new Equip("SuecaUnited");
+        Jugador h2 = new Huma("HumaRoser", 13, 8, 105);
+        Jugador a2 = new Alien("AlienRoser", 4, 20, 33);
+        Jugador g2 = new Guerrer("GuerrerRoser", 10, 1, 11);
+        Equip e1 = new Equip("SofiaUnited");Equip e2 = new Equip("RoserUnited");
+        e1.posa(h1);e1.posa(a1);e1.posa(g1);
+        e1.posa(h2);e1.posa(a2);e1.posa(g2);
         
-        //Provem a posar a h1
-        e1.posa(h1);
+        Poder aire = new Poder("Aire",10,1);
+        Poder terra = new Poder("Terra",5,11);
         
-        e1.posa(g1);
-        e1.posa(a1);
-        e1.posa(h1);
+        h1.posaPoder(aire);
         
-        System.out.println("TOSTRING D'EQUIP");
-        System.out.println(e1.toString());
-        System.out.println("");
-        System.out.println("TOSTRING D'H1");
-        System.out.println(h1.toString());
-        System.out.println("----------ARA LLEVEM A HUMÀ---------");
-        e1.lleva(h1.getNom());
-        System.out.println("TOSTRING D'EQUIP");
-        System.out.println(e1.toString());
-        System.out.println("");
-        System.out.println("TOSTRING D'H1");
-        System.out.println(h1.toString());
+        h2.posaPoder(aire);
+        h2.posaPoder(terra);
     }
 }
