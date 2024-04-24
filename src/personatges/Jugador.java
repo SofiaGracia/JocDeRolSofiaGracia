@@ -79,8 +79,8 @@ public class Jugador {
     protected void esColpejatAmb(int qpA) {
         
         System.out.println("");
-        System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+this.puntsDefensa+". Vides: "+this.vides);
-        int ferida = this.puntsDefensa - qpA;
+        System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
+        int ferida = (this.puntsDefensa+this.sumaB("D")) - qpA;
         if(ferida < 0){
             this.vides = (this.vides + ferida) < 0 ? 0 : (this.vides + ferida);
             System.out.print("-"+(ferida < 0 ? -ferida : ferida)+" = "+this.vides);
@@ -93,8 +93,8 @@ public class Jugador {
         if(atacat.getVides() == 0){
             throw new AtacAMortException();
         }
-        atacat.esColpejatAmb(this.getPuntsAtac());
-        this.esColpejatAmb(atacat.getPuntsAtac());
+        atacat.esColpejatAmb(this.getPuntsAtac()+this.sumaB("A"));
+        this.esColpejatAmb(atacat.getPuntsAtac()+atacat.sumaB("A"));
         
         System.out.println("");
         //DESPRÉS DE L'ATAC:
@@ -106,6 +106,22 @@ public class Jugador {
         System.out.println("");
         System.out.println("Atacant: "+atacant.toString());
         System.out.println("Atacat: "+atacat.toString());
+    }
+    public int sumaB(String tipusBonus){
+        int BA = 0, BD = 0;
+        for (Poder poder : this.poders) {
+            BA += poder.getBonusAtac();
+            BD += poder.getBonusDefensa();
+        }
+        int Bonus = 0;
+        if(this.poders.size() > 0){
+            switch(tipusBonus){
+                case "A": Bonus = BA; break;
+                case "D": Bonus = BD; break;
+                default: Bonus = 0;
+            }
+        }
+        return Bonus;
     }
     
     @Override
