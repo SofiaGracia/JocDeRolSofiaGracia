@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package inici;
 
 import Teclat.Teclat;
@@ -28,8 +25,7 @@ public class JocDeRolinici {
             switch(op){
                 case 1: menuConfiguracio(); break;
                 case 2: jugar(); break;
-                case 0:
-                    ixir = true;
+                case 0: ixir = true;
             }
         }
     }
@@ -47,8 +43,7 @@ public class JocDeRolinici {
                 case 1: Jugadors.menu(); break;
                 case 2: Equips.menu(); break;
                 case 3: Poders.menu();break;
-                case 0:
-                    ixir = true;
+                case 0: ixir = true;
             }
         }
     }

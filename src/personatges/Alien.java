@@ -17,10 +17,9 @@ public class Alien extends Jugador{
 
     @Override
     public void ataca(Jugador atacat) {
-        if ((this.getVides() > 20) && atacat.getVides() > 0) {
+        if (this.getVides() > 20) {
             this.setPuntsAtac(this.getPuntsAtac() + 3);
             this.setPuntsDefensa(this.getPuntsDefensa() - 3 < 0 ? 0 : this.getPuntsDefensa() - 3);
-            System.out.println("Alien embogit");
         }
         try {
             super.ataca(atacat);

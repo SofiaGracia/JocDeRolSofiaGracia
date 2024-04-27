@@ -52,10 +52,6 @@ public class Poders {
     private static void eliminar() {
         String nomP = Teclat.lligString("Nom del poder: ");
         Poder buscP = new Poder(nomP,0,0);
-        if(llista.contains(buscP)){
-            llista.remove(llista.get(llista.indexOf(buscP)));
-        }else{
-            System.out.println("Ja existeix");
-        }
+        System.out.println(llista.remove(llista.get(llista.indexOf(buscP)))? "S'ha esborrat el poder":"No s'ha trobat el poder");
     }
 }

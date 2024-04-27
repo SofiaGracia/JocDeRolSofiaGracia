@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class Poder {
     private String nom;
+    private int bonusAtac;
+    private int bonusDefensa;
 
     @Override
     public String toString() {
         return "\t- "+this.nom+" (BA:"+this.bonusAtac+", "+"BD:"+this.bonusDefensa+")";
     }
-    private int bonusAtac;
-    private int bonusDefensa;
-
+    
     public Poder(String nom, int bonusAtac, int bonusDefensa) {
         this.nom = nom;
         this.bonusAtac = bonusAtac;

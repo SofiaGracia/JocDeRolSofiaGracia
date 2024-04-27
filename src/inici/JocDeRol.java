@@ -7,8 +7,6 @@ package inici;
 import altres.Equip;
 import altres.Poder;
 import excepcions.AtacAMortException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import personatges.Alien;
 import personatges.Guerrer;
 import personatges.Huma;
@@ -90,7 +88,6 @@ public class JocDeRol {
         Equip e1 = new Equip("SofiaUnited");Equip e2 = new Equip("RoserUnited");
         e1.posa(h1);e1.posa(a1);e1.posa(g1);
         e2.posa(h2);e2.posa(a2);e2.posa(g2);
-        e1.posa(h2);
         e1.posa(h1);
                 
         Poder aire = new Poder("Aire",10,1);
@@ -106,10 +103,19 @@ public class JocDeRol {
         System.out.println("");
         System.out.println("EQUIP ROSER");
         System.out.println(e2.toString());
-//        try{
-//            h1.ataca(h2);
-//        }catch(AtacAMortException e){
-//            System.out.println(e.getMessage());
-//        }
+        System.out.println("");
+        System.out.println(h1.toString());
+        System.out.println(a1.toString());
+        
+        try{
+            h1.ataca(h2);
+        }catch(AtacAMortException e){
+            System.out.println(e.getMessage());
+        }
+        try{
+            a1.ataca(h2);
+        }catch(AtacAMortException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

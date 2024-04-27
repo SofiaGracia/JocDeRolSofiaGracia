@@ -5,8 +5,6 @@
 package altres;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import personatges.Huma;
 import personatges.Jugador;
 
 /**
@@ -30,7 +28,7 @@ public class Equip {
     }
     
     public void posa(Jugador jNou){
-        //El métode ha de posar eixe objecte en la llista de jugadors de l'equip.
+        
         if(jNou.getEquip() == null &&(!this.jugadors.contains(jNou))){
             this.jugadors.add(jNou);
             jNou.setEquip(this);
@@ -40,9 +38,8 @@ public class Equip {
     }
     
     public void lleva(String nomJ){
-        //Anem a crear un jugador amb el mateix nom
-        Jugador borrJug = new Jugador(nomJ,0,0,0);
         
+        Jugador borrJug = new Jugador(nomJ,0,0,0);
         if(this.jugadors.remove(borrJug)){
             borrJug.setEquip(null);
         }

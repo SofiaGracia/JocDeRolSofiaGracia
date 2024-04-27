@@ -43,15 +43,10 @@ public class Jugadors {
     }
 
     private static void crear() {
-        //Tipus de jugador
         char tipusJ = Teclat.lligChar("Tipus de jugador", "HGA");
-        //Nom del jugador
         String nomJ = Teclat.lligString("Nom del jugador: ");
-        //Els punts d'atac
         int pA = Teclat.lligInt("Punts d'atac del jugador", 1, 100);
-        //Punts de defensa
         int pD = 100 - pA;
-        //Comprovar i posar el jugador
         Jugador nouJ = null;
         switch(tipusJ){
             case 'H': nouJ = new Huma(nomJ, pA, pD, videsInicials);break;
@@ -75,14 +70,13 @@ public class Jugadors {
     }
 
     private static void assignarEquip() {
-        String nomJ = Teclat.lligString("Nom del jugador: ");
-        Jugador buscJ = new Jugador(nomJ,0,0,0);
-        if(llista.contains(buscJ)){
-            Jugador trobJ = llista.get(llista.indexOf(buscJ));
-            String nomE = Teclat.lligString("Nom de l'equip: ");
-            Equip buscE = new Equip(nomE);
-            if(Equips.llista.contains(buscE)){
-                buscE.posa(trobJ);
+        Jugador busJ = buscarJugador();
+        if(busJ != null){
+            Equip busE = buscarEquip();
+            if(busE != null){
+                busE.posa(busJ);
+            }else{
+                System.out.println("L'equip no existeix");
             }
         }else{
             System.out.println("El jugador no existeix");
@@ -90,32 +84,47 @@ public class Jugadors {
     }
 
     private static void llevarEquip() {
-        String nomJ = Teclat.lligString("Nom del jugador: ");
-        Jugador buscJ = new Jugador(nomJ,0,0,0);
-        if(llista.contains(buscJ)){
-            Jugador trobJ = llista.get(llista.indexOf(buscJ));
-            String nomE = Teclat.lligString("Nom de l'equip: ");
-            Equip buscE = new Equip(nomE);
-            Equip trobE = Equips.llista.get(Equips.llista.indexOf(nomE));
-            if(trobE.getNom().equals(trobJ.getEquip().getNom())){
-                trobE.lleva(nomJ);
+        Jugador busJ = buscarJugador();
+        if (busJ != null) {
+            Equip busE = buscarEquip();
+            if (busE != null) {
+                if (busE.getNom().equals(busJ.getEquip().getNom())) {
+                    busE.lleva(busJ.getNom());
+                } else {
+                    System.out.println("El jugador no pertany a este equip");
+                }
+            } else {
+                System.out.println("L'equip no existeix");
+            }
+        } else {
+            System.out.println("El jugador no existeix");
+        }
+    }
+    
+    private static void assignarPoder() {
+        Jugador busJ = buscarJugador();
+        if(busJ != null){
+            String nomP = Teclat.lligString("Nom del poder: ");
+            Poder busP = new Poder(nomP,0,0);
+            if(Poders.llista.contains(busP)){
+                busJ.posaPoder(busP);
+            }else{
+                System.out.println("No existeix el poder "+nomP);
             }
         }else{
             System.out.println("El jugador no existeix");
         }
     }
     
-    private static void assignarPoder() {
+    private static Jugador buscarJugador(){
         String nomJ = Teclat.lligString("Nom del jugador: ");
         Jugador buscJ = new Jugador(nomJ,0,0,0);
-        if(llista.contains(buscJ)){
-            Jugador trobJ = llista.get(llista.indexOf(buscJ));
-            String nomP = Teclat.lligString("Nom del poder: ");
-            int baP = Teclat.lligInt("Bonus d'atac del poder: ",0,100);
-            int bdP = 100 - baP;
-            trobJ.posaPoder(new Poder(nomP, baP, bdP));
-        }else{
-            System.out.println("El jugador no existeix");
-        }
+        return llista.contains(buscJ)? llista.get(llista.indexOf(buscJ)) : null;
+    }
+    
+    private static Equip buscarEquip(){
+        String nomE = Teclat.lligString("Nom de l'equip: ");
+        Equip buscE = new Equip(nomE);
+        return Equips.llista.contains(buscE)? Equips.llista.get(Equips.llista.indexOf(buscE)) : null;
     }
 }
