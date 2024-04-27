@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/sofia/PRG/JocDeRol/src/inici/JocDeRol.java</file>
-            <file>file:/home/sofia/PRG/JocDeRol/src/altres/Poder.java</file>
-            <file>file:/home/sofia/PRG/JocDeRol/src/personatges/Guerrer.java</file>
+            <file>file:/home/sofia/PRG/JocDeRol/src/inici/Jugadors.java</file>
             <file>file:/home/sofia/PRG/JocDeRol/src/personatges/Jugador.java</file>
-            <file>file:/home/sofia/PRG/JocDeRol/src/altres/Equip.java</file>
+            <file>file:/home/sofia/PRG/JocDeRol/src/inici/JocDeRolinici.java</file>
         </group>
     </open-files>
 </project-private>

@@ -31,11 +31,11 @@ public class Equip {
     
     public void posa(Jugador jNou){
         //El métode ha de posar eixe objecte en la llista de jugadors de l'equip.
-        if(!this.jugadors.contains(jNou)){
+        if(jNou.getEquip() == null &&(!this.jugadors.contains(jNou))){
             this.jugadors.add(jNou);
             jNou.setEquip(this);
-        }else{
-            System.out.println("Ja existeix el jugador");
+        }else if((jNou.getEquip() != null)&&(!this.jugadors.contains(jNou))){
+            System.out.println("El jugador "+jNou.getNom()+" ja està a "+jNou.getEquip().getNom());
         }
     }
     
@@ -43,11 +43,8 @@ public class Equip {
         //Anem a crear un jugador amb el mateix nom
         Jugador borrJug = new Jugador(nomJ,0,0,0);
         
-        if(this.jugadors.contains(borrJug)){
-            int posJ = this.jugadors.indexOf(borrJug);
-            Jugador jugB = this.jugadors.get(posJ);
-            this.jugadors.remove(jugB);
-            jugB.setEquip(null);
+        if(this.jugadors.remove(borrJug)){
+            borrJug.setEquip(null);
         }
     }
 
@@ -59,5 +56,11 @@ public class Equip {
             infoJ += "\t-"+jugador.toString()+"\n";
         }
         return "Equip "+this.nom+":\n"+infoJ;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        final Equip eq = (Equip) obj;
+        return this.nom.equals(eq.nom);
     }
 }

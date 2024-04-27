@@ -66,7 +66,7 @@ public class Jugador {
         String poders = "";
         if(!this.poders.isEmpty()){
             for (Poder poder : this.poders) {
-                poders += "\n"+poder.toString();
+                poders += "\n\t"+poder.toString();
             }
         }
         return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+
@@ -108,11 +108,11 @@ public class Jugador {
                 BA += poder.getBonusAtac();
                 BD += poder.getBonusDefensa();
             }
-        }
-        switch(tipusBonus){
+            switch(tipusBonus){
                 case "A": Bonus = BA; break;
                 case "D": Bonus = BD; break;
             }
+        }
         return Bonus;
     }
     @Override
@@ -124,10 +124,10 @@ public class Jugador {
         return equip;
     }
     public void setEquip(Equip equip) {
-        if(equip != null && this.equip == null){
+        if(this.equip == null && equip != null){
             //posar
             this.equip = equip;
-            equip.posa(this);
+            this.equip.posa(this);
         }else if(equip == null && this.equip != null){
             //llevar
             this.equip.lleva(this.nom);

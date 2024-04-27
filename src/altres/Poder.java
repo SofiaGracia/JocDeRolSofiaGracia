@@ -1,6 +1,8 @@
 
 package altres;
 
+import java.util.Objects;
+
 public class Poder {
     private String nom;
 
@@ -40,4 +42,11 @@ public class Poder {
     public void setBonusAtac(int bonusAtac) {
         this.bonusAtac = bonusAtac;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        final Poder pod = (Poder) obj;
+        return this.nom.equals(pod.nom);
+    }
+    
 }

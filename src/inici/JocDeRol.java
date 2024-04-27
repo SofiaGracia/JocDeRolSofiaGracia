@@ -90,7 +90,9 @@ public class JocDeRol {
         Equip e1 = new Equip("SofiaUnited");Equip e2 = new Equip("RoserUnited");
         e1.posa(h1);e1.posa(a1);e1.posa(g1);
         e2.posa(h2);e2.posa(a2);e2.posa(g2);
-        
+        e1.posa(h2);
+        e1.posa(h1);
+                
         Poder aire = new Poder("Aire",10,1);
         Poder terra = new Poder("Terra",5,11);
         
@@ -98,10 +100,16 @@ public class JocDeRol {
         
         h2.posaPoder(aire);
         h2.posaPoder(terra);
-        try{
-            h1.ataca(h2);
-        }catch(AtacAMortException e){
-            System.out.println(e.getMessage());
-        }
+        System.out.println("");
+        System.out.println("EQUIP SOFIA");
+        System.out.println(e1.toString());
+        System.out.println("");
+        System.out.println("EQUIP ROSER");
+        System.out.println(e2.toString());
+//        try{
+//            h1.ataca(h2);
+//        }catch(AtacAMortException e){
+//            System.out.println(e.getMessage());
+//        }
     }
 }
