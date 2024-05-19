@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package altres;
 
 import java.util.ArrayList;
@@ -14,10 +11,6 @@ import personatges.Jugador;
 public class Equip {
     private String nom;
     ArrayList<Jugador> jugadors = new ArrayList();
-    
-    public Equip(String nom) {
-        this.nom = nom;
-    }
 
     public String getNom() {
         return nom;
@@ -26,22 +19,28 @@ public class Equip {
     public void setNom(String nomEquip) {
         this.nom = nomEquip;
     }
+
+    public Equip(String nom) {
+        this.nom = nom;
+    }
     
-    public void posa(Jugador jNou){
+    public void posa(Jugador nouJ){
         
-        if(jNou.getEquip() == null &&(!this.jugadors.contains(jNou))){
-            this.jugadors.add(jNou);
-            jNou.setEquip(this);
-        }else if((jNou.getEquip() != null)&&(!this.jugadors.contains(jNou))){
-            System.out.println("El jugador "+jNou.getNom()+" ja està a "+jNou.getEquip().getNom());
+        if(nouJ.getEquip() == null &&(!this.jugadors.contains(nouJ))){
+            this.jugadors.add(nouJ);
+            nouJ.setEquip(this);
+        }else if((nouJ.getEquip() != null)&&(!this.jugadors.contains(nouJ))){
+            System.out.println("El jugador "+nouJ.getNom()+" ja està a "+nouJ.getEquip().getNom());
         }
     }
     
     public void lleva(String nomJ){
         
-        Jugador borrJug = new Jugador(nomJ,0,0,0);
-        if(this.jugadors.remove(borrJug)){
-            borrJug.setEquip(null);
+        int posJ = this.jugadors.indexOf(new Jugador(nomJ,0,0,0));
+        if(posJ != -1){
+            Jugador trobJ = this.jugadors.get(posJ);
+            this.jugadors.remove(trobJ);
+            trobJ.setEquip(null);
         }
     }
 
@@ -50,7 +49,7 @@ public class Equip {
         
         String infoJ = "";
         for (Jugador jugador : jugadors) {
-            infoJ += "\t-"+jugador.toString()+"\n";
+            infoJ += "\t-"+jugador+"\n";
         }
         return "Equip "+this.nom+":\n"+infoJ;
     }
@@ -59,5 +58,9 @@ public class Equip {
     public boolean equals(Object obj) {
         final Equip eq = (Equip) obj;
         return this.nom.equals(eq.nom);
+    }
+
+    public ArrayList<Jugador> getJugadors() {//També haguerem pogut fer l'ArrayList d'Equip public
+        return jugadors;
     }
 }

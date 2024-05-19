@@ -19,9 +19,9 @@ public class Jugadors {
     static int videsInicials = 200;
     
     static void menu() {
-        boolean ixir = false;
-        while(! ixir){
-            int op = Teclat.lligOpcio(
+        int op = -1;
+        while(op != 0){
+            op = Teclat.lligOpcio(
                     "JUGADORS", 
                 "Crear", 
                 "Consultar",
@@ -29,15 +29,15 @@ public class Jugadors {
                 "Assignar a equip",
                 "Llevar d'equip",
                 "Assignar poder",
-                "Eixir");
+                "Modificar vides inicials");
             switch(op){
                 case 1: crear(); break;
                 case 2: consultar(); break;
                 case 3: eliminar();break;
                 case 4: assignarEquip();break;
                 case 5: llevarEquip();break;
-                case 6: assignarPoder();break;
-                case 0: ixir = true;
+                case 6: assignarPoder(); break;
+                case 7: modificarVidesInicials();
             }
         }
     }
@@ -51,15 +51,19 @@ public class Jugadors {
         switch(tipusJ){
             case 'H': nouJ = new Huma(nomJ, pA, pD, videsInicials);break;
             case 'G': nouJ = new Guerrer(nomJ, pA, pD, videsInicials);break;
-            case 'A': nouJ = new Alien(nomJ, pA, pD, videsInicials);break;
+            case 'A': nouJ = new Alien(nomJ, pA, pD, videsInicials);
         }
-        if(!llista.contains(nouJ)){llista.add(nouJ);}
+        if (!llista.contains(nouJ)) {
+            llista.add(nouJ);
+        } else {
+            System.out.println("El jugador " + nomJ + " ja existix");
+        }
     }
 
     private static void consultar() {
         System.out.println("LLISTA DELS JUGADORS DE LA PARTIDA:");
         for (Jugador jugador : llista) {
-            System.out.println(jugador);
+            System.out.println("\n"+jugador);
         }
     }
 
@@ -76,10 +80,10 @@ public class Jugadors {
             if(busE != null){
                 busE.posa(busJ);
             }else{
-                System.out.println("L'equip no existeix");
+                System.out.println("L'equip no existix");
             }
         }else{
-            System.out.println("El jugador no existeix");
+            System.out.println("El jugador no existix");
         }
     }
 
@@ -94,10 +98,10 @@ public class Jugadors {
                     System.out.println("El jugador no pertany a este equip");
                 }
             } else {
-                System.out.println("L'equip no existeix");
+                System.out.println("L'equip no existix");
             }
         } else {
-            System.out.println("El jugador no existeix");
+            System.out.println("El jugador no existix");
         }
     }
     
@@ -105,14 +109,14 @@ public class Jugadors {
         Jugador busJ = buscarJugador();
         if(busJ != null){
             String nomP = Teclat.lligString("Nom del poder: ");
-            Poder busP = new Poder(nomP,0,0);
-            if(Poders.llista.contains(busP)){
-                busJ.posaPoder(busP);
+            int posP = Poders.llista.indexOf(new Poder(nomP,0,0));
+            if(posP != -1){
+                busJ.posaPoder(Poders.llista.get(posP));
             }else{
-                System.out.println("No existeix el poder "+nomP);
+                System.out.println("El poder no existix "+nomP);
             }
         }else{
-            System.out.println("El jugador no existeix");
+            System.out.println("El jugador no existix");
         }
     }
     
@@ -126,5 +130,18 @@ public class Jugadors {
         String nomE = Teclat.lligString("Nom de l'equip: ");
         Equip buscE = new Equip(nomE);
         return Equips.llista.contains(buscE)? Equips.llista.get(Equips.llista.indexOf(buscE)) : null;
+    }
+    
+    /**
+     * Posa i modifica les vides inicials dels jugadors.
+     * Hi ha que comentar que els jugadors de la clase Humà sempre tindrán 100 punts com a vides inicials.
+     */
+    private static void modificarVidesInicials() {
+        videsInicials = Teclat.lligInt("Indica vides inicials dels jugadors (Valor actual: "+videsInicials+")", 1, 200);
+        
+        //Gaste un fore per a canviar les videsInicials dels jugadors que ja estan registrats
+        for (Jugador jugador : llista) {
+            jugador.setVides(videsInicials);
+        }
     }
 }

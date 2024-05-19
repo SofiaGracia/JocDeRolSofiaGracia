@@ -2,8 +2,6 @@
 package personatges;
 
 import excepcions.AtacAMortException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +18,7 @@ public class Alien extends Jugador{
         if (this.getVides() > 20) {
             this.setPuntsAtac(this.getPuntsAtac() + 3);
             this.setPuntsDefensa(this.getPuntsDefensa() - 3 < 0 ? 0 : this.getPuntsDefensa() - 3);
+//            System.out.println("Alien Embogit: "+this.getNom());//Ho deixat comentat perquè m'ajuda a saber si el procediment funciona
         }
         try {
             super.ataca(atacat);

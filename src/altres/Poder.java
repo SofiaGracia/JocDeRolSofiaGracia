@@ -1,8 +1,6 @@
 
 package altres;
 
-import java.util.Objects;
-
 public class Poder {
     private String nom;
     private int bonusAtac;

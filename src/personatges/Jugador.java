@@ -17,9 +17,8 @@ public class Jugador {
     private int puntsDefensa;
     private int vides;
     private Equip equip;
-    private ArrayList<Poder> poders = new ArrayList();
+    private final ArrayList<Poder> poders = new ArrayList();
     
-    //Constructor
     public Jugador(String nom, int pA, int pD, int pV) {
         this.nom = nom;
         this.puntsAtac = pA;
@@ -54,31 +53,31 @@ public class Jugador {
     public int getVides() {
         return vides;
     }
-
-    protected void setVides(int vides) {
+    
+    //L'he posada pública per a que siga accesible per a modificarVidesIncials() en la clase Jugadors.
+    public void setVides(int vides) {
         this.vides = vides;
     }
 
     @Override
     public String toString() {
         
-        String poders = "";
+        String qPoders = "";
         for (Poder poder : this.poders) {
-            poders += "\n\t"+poder.toString();
+            qPoders += "\n\t"+poder.toString();
         }
         return this.nom+" ["+(this.equip == null? "Sense equip" : this.equip.getNom())+"] ( "+
                 this.getClass().getSimpleName().toUpperCase()+
-                ", PA:"+this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+" / PV:"+this.getVides()+" )"+poders;
+                ", PA:"+this.getPuntsAtac()+" / PD:"+this.getPuntsDefensa()+" / PV:"+this.getVides()+" )"+qPoders;//No mostrarà res si el jugador no té poders
     }
     
     protected void esColpejatAmb(int qpA) {
-        System.out.println("");
-        System.out.print(this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
+        System.out.print("\n"+this.nom+" és colpejat amb "+qpA+" punts i es defén amb "+(this.puntsDefensa+this.sumaB("D"))+". Vides: "+this.vides);
         int ferida = (this.puntsDefensa+this.sumaB("D")) - qpA;
         if(ferida < 0){
             this.vides = (this.vides + ferida) < 0 ? 0 : (this.vides + ferida);
-            System.out.print("-"+(ferida < 0 ? -ferida : ferida)+" = "+this.vides);
-            System.out.println("");
+            
+            System.out.print("-"+(ferida < 0 ? -ferida : ferida)+" = "+this.vides+"\n");//Si no li lleva vides no mostrem la resta
         }
     }
     
@@ -90,7 +89,7 @@ public class Jugador {
         }
         atacat.esColpejatAmb(this.getPuntsAtac()+this.sumaB("A"));
         this.esColpejatAmb(atacat.getPuntsAtac()+atacat.sumaB("A"));
-        System.out.println("\nDESPRÉS DE L'ATAC:");
+        System.out.println("\n\nDESPRÉS DE L'ATAC:");
         mostrarConfrontacio(this, atacat);
     }
     
@@ -99,18 +98,18 @@ public class Jugador {
         System.out.println("Atacat: "+atacat.toString());
     }
     
-    private int sumaB(String tipusBonus){//No fem ningún control, però tampoc arrepleguem res de teclat
-        int Bonus = 0,BA = 0, BD = 0;
-
-        for (Poder poder : this.poders) {//Tampoc comprovem si l'Arraylist de poders està buit
+    /**
+     * Funció que suma la quantitat de punts dels Bonus dels Poders que té un jugador segons el tipus de Bonus
+     * @param tipusBonus
+     * @return Suma del punts del tipus de Bonus que hem indicat
+     */
+    protected int sumaB(String tipusBonus){//No fem cap control, però tampoc arrepleguem res de teclat. L'he deixat en protected per a que puga accedir Guerrer.
+        int BA = 0, BD = 0;
+        for (Poder poder : this.poders) {
             BA += poder.getBonusAtac();
             BD += poder.getBonusDefensa();
         }
-        switch(tipusBonus){
-            case "A": Bonus = BA; break;
-            case "D": Bonus = BD; break;
-        }
-        return Bonus;
+        return tipusBonus.equals("A")? BA: BD;
     }
     
     @Override

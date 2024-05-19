@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//Hi ha dos fitxers que tenem main: Inici i ProvesAmbFases
+
 package inici;
 
 import altres.Equip;
@@ -13,10 +11,11 @@ import personatges.Huma;
 import personatges.Jugador;
 
 /**
- *
+ *Clase per a fer proves de les fases del Joc de Rol
+ * És editable i no està molt ben organitzat
  * @author sofia
  */
-public class JocDeRol {
+public class ProvesAmbFases {
     public static void main(String[] args) {
         provaFase1();
         provaFase2();
@@ -37,18 +36,18 @@ public class JocDeRol {
 //        Jugador a = new Alien();
     }
     static void provaFase2(){
-//        Jugador h2 = new Huma("Pep_Garcia", 13, 8, 39);
+//        Jugador h2 = new Huma("Pep", 13, 8, 39);
 //        Jugador g2 = new Guerrer("Superpep", 27, 20, 32);
 //        h2.ataca(g2);
     }
     static void provaFase3() throws AtacAMortException {
-//        Jugador h2 = new Huma("Pep_Garcia", 13, 8, 105);
-////        Jugador g2 = new Guerrer("Superpep", 27, 20, 32);
+//        Jugador h2 = new Huma("Pepa", 13, 8, 105);
+////        Jugador g2 = new Guerrer("Pepi", 27, 20, 32);
 ////        h2.ataca(g2);
 //        System.out.println(h2.toString());
         
 //        Jugador a1 = new Alien("E.T.", 4, 20, 33);
-//        Jugador g1 = new Guerrer("Sofia", 0, 1, 0);
+//        Jugador g1 = new Guerrer("Atila", 0, 1, 0);
 //        
 //        try{
 //            a1.ataca(g1);
@@ -64,9 +63,9 @@ public class JocDeRol {
 //        System.out.println(a1.toString());
     }
     static void provaFase4(){
-//        Jugador h1 = new Huma("Pep_Garcia", 13, 8, 105);
+//        Jugador h1 = new Huma("Peqiquet", 13, 8, 105);
 //        Jugador a1 = new Alien("E.T.", 4, 20, 33);
-//        Jugador g1 = new Guerrer("Sofia", 0, 1, 0);
+//        Jugador g1 = new Guerrer("Atila", 0, 1, 0);
 //        
 //        Equip e1 = new Equip("SuecaUnited");
 //        
@@ -78,13 +77,13 @@ public class JocDeRol {
 //        e1.posa(h1);
     }
     static void provaFase5(){
-        Jugador h1 = new Huma("HumaSofia", 13, 8, 105);
-        Jugador a1 = new Alien("AlienSofia", 4, 20, 33);
-        Jugador g1 = new Guerrer("GuerrerSofia", 10, 1, 11);
+        Jugador h1 = new Huma("HS", 13, 8, 105);
+        Jugador a1 = new Alien("AS", 4, 20, 33);
+        Jugador g1 = new Guerrer("GS", 10, 1, 11);
         
-        Jugador h2 = new Huma("HumaRoser", 13, 8, 105);
-        Jugador a2 = new Alien("AlienRoser", 4, 20, 33);
-        Jugador g2 = new Guerrer("GuerrerRoser", 10, 1, 11);
+        Jugador h2 = new Huma("HR", 13, 8, 0);
+        Jugador a2 = new Alien("AR", 4, 20, 33);
+        Jugador g2 = new Guerrer("GR", 10, 1, 11);
         Equip e1 = new Equip("SofiaUnited");Equip e2 = new Equip("RoserUnited");
         e1.posa(h1);e1.posa(a1);e1.posa(g1);
         e2.posa(h2);e2.posa(a2);e2.posa(g2);

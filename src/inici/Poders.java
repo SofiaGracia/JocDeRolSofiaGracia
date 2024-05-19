@@ -13,19 +13,17 @@ public class Poders {
     static ArrayList<Poder> llista = new ArrayList();
 
     static void menu() {
-        boolean ixir = false;
-        while(! ixir){
-            int op = Teclat.lligOpcio(
+        int op = -1;
+        while(op != 0){
+            op = Teclat.lligOpcio(
                     "EQUIPS", 
                 "Crear", 
                 "Consultar",
-                "Eliminar",
-                "Eixir");
+                "Eliminar");
             switch(op){
                 case 1: crear(); break;
                 case 2: consultar(); break;
-                case 3: eliminar();break;
-                case 0: ixir = true;
+                case 3: eliminar();
             }
         }
     }
@@ -50,6 +48,8 @@ public class Poders {
     }
 
     private static void eliminar() {
+        
+        //Com la relació Poders-Jugadors és unidireccional no borraré el poder de la llista de poders del jugador
         String nomP = Teclat.lligString("Nom del poder: ");
         Poder buscP = new Poder(nomP,0,0);
         System.out.println(llista.remove(llista.get(llista.indexOf(buscP)))? "S'ha esborrat el poder":"No s'ha trobat el poder");
